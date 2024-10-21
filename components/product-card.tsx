@@ -1,11 +1,8 @@
-"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/types";
-import useCartStore from "@/store/cartStore";
 
 export function ProductCard({ product }: { product: Product }) {
-  const addToCart = useCartStore((state) => state.addToCart);
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <img
@@ -20,9 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.title}
         </h2>
         <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
-        <Button onClick={() => addToCart(product)} className="w-full">
-          Add to Cart
-        </Button>
+        <Button className="w-full">Add to Cart</Button>
       </div>
     </div>
   );

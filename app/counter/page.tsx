@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import useCountStore from "@/store/counterStore";
 
 export default function CounterPage() {
-  const { count, increment, decrement, reset } = useCountStore(
-    (state) => state
-  );
+  const [count, setCount] = useState(0);
+
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => setCount((prev) => prev - 1);
+  const reset = () => setCount(0);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
