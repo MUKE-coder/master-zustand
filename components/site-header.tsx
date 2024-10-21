@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import useCartStore from "@/store/cartStore";
 
 // This is a mock user object. In a real application, you'd get this from your authentication system
 const user = {
@@ -20,6 +22,8 @@ const user = {
 
 export function SiteHeader() {
   const isLoggedIn = false;
+
+  const items = useCartStore((state) => state.items);
 
   return (
     <nav className="bg-white shadow-md">
@@ -34,7 +38,7 @@ export function SiteHeader() {
             <Link href="/cart" className="relative">
               <ShoppingCart className="h-6 w-6 text-gray-600" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                3
+                {items.reduce((sum, item) => sum + item.quantity, 0)}
               </span>
             </Link>
             <Link href="/counter">Counter</Link>
